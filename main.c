@@ -1,24 +1,16 @@
-#include<stdio.h>
-#include"./bmp.h"
-FILE* file;
-int main(){
-    printf("Start of Image Creation\n");
-    file = fopen("./pic.bmp", "wb");
-    BmpHeader header;
-    header.type = 0x424D;
-    header.size = 0;
-    header.reserved1 = 0;
-    header.reserved2 = 0;
-    header.offset = 54;
-    BmpInfoHeader iHeader;
-    iHeader.size = 14;
-    iHeader.width = 2;
-    iHeader.height = 2;
-    iHeader.planes = 1;
-    iHeader.bits= 24;
-    iHeader.compression= 0;
-    iHeader.imagesize = 3*iHeader.height*iHeader.width;
-    
-    
-    printf("End of Image Creation\n");
+#include "./bmp.h"
+#include <stdint.h>
+#include <stdio.h>
+int main() {
+  int iHeight = 100;
+  int iWidth = 100;
+  uint8_t image[iHeight][iWidth * 3];
+  for (int i = 0; i < iHeight; i++) {
+    for (int j = 0; j < iWidth * 3; j += 3) {
+      image[i][j] = 255;
+      image[i][j + 1] = 255;
+      image[i][j + 2] = 0;
+    }
+  }
+  createImage(iHeight, iWidth, (uint8_t *)image);
 }
