@@ -29,6 +29,7 @@ typedef struct {
   char r;
   char a;
 } paletteEntry;
-void createImage(int iHeight, int iWidth, uint8_t* image);
+void createImage(int iHeight, int iWidth, uint8_t* image, const char* fileName);
+void fromPPM(const char* inFileName, const char* outFileName);
 #pragma pack()
 #endif

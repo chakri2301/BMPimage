@@ -1,16 +1,24 @@
 #include "./bmp.h"
 #include <stdint.h>
 #include <stdio.h>
-int main() {
-  int iHeight = 100;
-  int iWidth = 100;
-  uint8_t image[iHeight][iWidth * 3];
-  for (int i = 0; i < iHeight; i++) {
-    for (int j = 0; j < iWidth * 3; j += 3) {
-      image[i][j] = 255;
-      image[i][j + 1] = 255;
-      image[i][j + 2] = 0;
+#include <string.h>
+int main(int argc, char *argv[]) {
+  printf("%d\n", argc);
+  argc--;
+  if (argc == 1) {
+    if (strcmp("-h", argv[1]) == 0) {
+      printf("Convert ascii 0-255 PPM into bitmap\n");
+      printf("bmpc <ppmFile>-o <output>\n");
+      return 0;
+    }
+    printf("Camehere\n");
+  }
+  if (argc != 3) {
+    printf("arguments Error. see \"bmpc -h\"\n");
+    return 0;
+  } else {
+    if (strcmp("-o", argv[2]) == 0) {
+      fromPPM(argv[1], argv[3]);
     }
   }
-  createImage(iHeight, iWidth, (uint8_t *)image);
 }
